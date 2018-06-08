@@ -1,10 +1,13 @@
 # Where's Joe Hatcher?
 ### A Ruby Mystery Adventure
+Joe called and asked if you could help set up some new computers at the office.  
+You werent far when he called so you agreed.  
 
+> Note: The story elements and room descriptions have been removed from the design document to prevent spoiling the game. Enjoy!
 
 ## Design Document
 Setting: "The Office"  
-Story: [REDACTED]
+Story: [~~REDACTED~~]
 
 #### Rooms
 Entrance  
@@ -37,7 +40,7 @@ Objects: Window, Piece of Paper/Paper
 
 Washroom  
 Verbs: Walk/Go to, look at/through, use  
-Exits: Hall, [REDACTED]  
+Exits: Hall  
 Objects: Mirror, Sink, Windows
 
 Office Commons  
