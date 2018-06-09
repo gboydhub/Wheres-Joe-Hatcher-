@@ -100,7 +100,7 @@ class Game
             nextRoom = @currentRoom.get_exit(wordList[1])
             if nextRoom then
                 goto_room(nextRoom)
-                refresh_room()
+                if !defined?(ISTESTING); refresh_room() end
                 return true
             else
                 return false

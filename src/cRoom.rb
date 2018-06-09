@@ -29,6 +29,11 @@ class Room
                 return value
             end
         end
+        @objects.each do |oKey, obj|
+            if obj.try_verb(verb) then
+                return oKey
+            end
+        end
 
         return false
     end

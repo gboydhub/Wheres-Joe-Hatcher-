@@ -1,4 +1,5 @@
 require "./src/cRoom.rb"
+require "./src/cItem.rb"
 require "test/unit"
 
 class Test_room_class < Test::Unit::TestCase
@@ -30,5 +31,13 @@ class Test_room_class < Test::Unit::TestCase
       assert_equal(place.try_verb("move"), "exit")
       assert_equal(place.try_verb("pickup"), "get")
       assert_false(place.try_verb("hi"))
+    end
+
+    def test_objs
+      place = Room.new("Place", "Someplace")
+      newItem = Item.new("paper", "scrap")
+      newItem.update_verbs({"read" => "Its a piece of paper"})
+      place.update_objects({"paper" => newItem})
+      assert_equal(place.try_verb("read"), "paper")
     end
 end

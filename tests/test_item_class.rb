@@ -9,13 +9,6 @@ class Test_item_class < Test::Unit::TestCase
         assert_equal(obj.desc, "a shiny sword")
     end
 
-    def test_item_names
-        paper = Item.new("Paper", "scrap of paper")
-        paper.add_alt_name("scrap")
-        assert_true(paper.is_called?("scrap"))
-        assert_false(paper.is_called?("test"))
-    end
-
     def test_item_verbs
         paper = Item.new("Paper", "scrap of paper")
         paper.update_verbs({'read' => 'It says: Hello World!'})
