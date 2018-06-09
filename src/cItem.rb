@@ -1,9 +1,8 @@
 
 class Item
-    def initialize(name, desc, usetext)
+    def initialize(name, desc)
         @name = name
         @desc = desc
-        @usetext = usetext
         @verbs = {}
         @altnames = Array.new
     end
@@ -20,7 +19,16 @@ class Item
         name.eql? @altnames.detect{ |e| e == name}
     end
 
+    def try_verb(verb)
+        @verbs.each do |verbKey, value|
+            if verbKey == verb then
+                return value
+            end
+        end
+
+        return false
+    end
+
     attr_accessor     :name
     attr_accessor     :desc
-    attr_accessor     :usetext
 end
