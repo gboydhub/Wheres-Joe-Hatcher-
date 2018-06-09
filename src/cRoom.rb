@@ -23,6 +23,16 @@ class Room
         return @exits[name]
     end
 
+    def try_verb(verb)
+        @verbs.each do |verbKey, value|
+            if verbKey == verb then
+                return value
+            end
+        end
+
+        return false
+    end
+
 
     attr_reader     :name
     attr_reader     :desc

@@ -21,4 +21,14 @@ class Test_room_class < Test::Unit::TestCase
       try = home.get_exit("north")
       assert_equal(try.name, "North room")
     end
+
+    def test_verbs
+      place = Room.new("Place", "Someplace")
+      place.update_verbs({'go' => 'exit', 'move' => 'exit', 'pickup' => 'get'})
+
+      assert_equal(place.try_verb("go"), "exit")
+      assert_equal(place.try_verb("move"), "exit")
+      assert_equal(place.try_verb("pickup"), "get")
+      assert_false(place.try_verb("hi"), 0)
+    end
 end
