@@ -18,6 +18,9 @@ class Game
             You can also go south to the entrance of the building.
             DESC
         )
+        @objElevAPanel = Item.new("panel", "elevator panel")
+        @objElevAPanel.update_verbs({"look" => "Buttons are labeled: B1, 1F, 2F, 3F, 4F"})
+
         @rmEntrance.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmEntrance.update_exits({"up" => @rmStairwellB, "north" => @rmElevatorA, "elevator" => @rmElevatorA})
 
@@ -32,12 +35,12 @@ class Game
 
     def start()
         @currentRoom = @rmEntrance
+        @lastRoom = nil
         system "clear" or system "cls"
         sleep 0.3
         puts "You walk through the glass door, into the Entrance of the building.\n\n"
 
         @showDescFlag = true
-        @lastRoom = nil
         while @isRunning == true do
             if @showDescFlag then
                 @showDescFlag = false
@@ -61,6 +64,7 @@ class Game
 
 
     def goto_room(room)
+        @lastRoom = @currentRoom
         @currentRoom = room
     end
 
@@ -83,7 +87,7 @@ class Game
         end
 
         while(wordList.length > 2)
-            if ["is", "to", "a", "the"].include?(wordList[1])
+            if ["is", "to", "a", "the", "at"].include?(wordList[1])
                 wordList[1] = wordList[2]
                 wordList.delete_at(2)
             else
@@ -101,8 +105,6 @@ class Game
             else
                 return false
             end
-        when "look_obj"
-
         else
             return false
         end
