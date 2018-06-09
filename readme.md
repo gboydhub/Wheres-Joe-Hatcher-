@@ -3,7 +3,15 @@
 Joe called and asked if you could help set up some new computers at the office.  
 You werent far when he called so you agreed.  
 
-> Note: The story elements and room descriptions have been removed from the design document to prevent spoiling the game. Enjoy!
+> Note: The story elements and room descriptions have been removed from the design document to prevent spoiling the game.
+
+```
+To play:  
+Clone github, run 'ruby ./src/wheres_joe_hatcher.rb' from root directory
+
+To Test:
+'rake test' from root directory
+```
 
 ## Design Document
 Setting: "The Office"  
