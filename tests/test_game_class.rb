@@ -1,3 +1,4 @@
+ISTESTING = true
 require "./src/wheres_joe_hatcher.rb"
 require "./src/cRoom.rb"
 require "test/unit"
