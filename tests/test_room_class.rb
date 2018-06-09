@@ -29,6 +29,6 @@ class Test_room_class < Test::Unit::TestCase
       assert_equal(place.try_verb("go"), "exit")
       assert_equal(place.try_verb("move"), "exit")
       assert_equal(place.try_verb("pickup"), "get")
-      assert_false(place.try_verb("hi"), 0)
+      assert_false(place.try_verb("hi"))
     end
 end
