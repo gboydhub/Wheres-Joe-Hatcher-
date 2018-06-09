@@ -31,11 +31,15 @@ class Room
         end
         @objects.each do |oKey, obj|
             if obj.try_verb(verb) then
-                return oKey
+                return "item_verb"
             end
         end
 
         return false
+    end
+
+    def item_exists?(name)
+        @objects.has_key? name
     end
 
 
