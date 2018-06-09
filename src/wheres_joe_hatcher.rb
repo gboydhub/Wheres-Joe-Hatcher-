@@ -35,23 +35,30 @@ class Game
         system "clear" or system "cls"
         sleep 0.3
         puts "You walk through the glass door, into the Entrance of the building.\n\n"
+
+        @showDescFlag = true
+        @lastRoom = nil
         while @isRunning == true do
-            puts "#{@currentRoom.name}"
-            puts @currentRoom.desc
+            if @showDescFlag then
+                @showDescFlag = false
+                puts "#{@currentRoom.name}"
+                puts @currentRoom.desc
+            end
             puts "\nWhat will you do?"
             print "> "
             inString = gets.chomp
             parseResult = parse_command(inString)
-            while !parseResult do 
-                puts "I dont understand that command."
-                puts "\nWhat will you do?"
-                print "> "
-                inString = gets.chomp
-                parseResult = parse_command(inString)
+            if !parseResult then
+                puts "\nI dont understand that command."
             end
-            system "clear" or system "cls"
         end
     end
+
+    def refresh_room()
+        system "clear" or system "cls"
+        @showDescFlag = true
+    end
+
 
     def goto_room(room)
         @currentRoom = room
@@ -69,6 +76,7 @@ class Game
                 @isRunning = false
                 return true
             elsif wordList[0] == "look" then
+                refresh_room()
                 return true
             end
             return false
@@ -88,10 +96,13 @@ class Game
             nextRoom = @currentRoom.get_exit(wordList[1])
             if nextRoom then
                 goto_room(nextRoom)
+                refresh_room()
                 return true
             else
                 return false
             end
+        when "look_obj"
+
         else
             return false
         end
@@ -100,6 +111,6 @@ class Game
 end
 
 if(!defined? ISTESTING) then
-WheresJoeHatcher = Game.new
-WheresJoeHatcher.start()
+    WheresJoeHatcher = Game.new
+    WheresJoeHatcher.start()
 end
