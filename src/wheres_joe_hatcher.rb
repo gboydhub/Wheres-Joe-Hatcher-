@@ -103,6 +103,9 @@ class Game
         
         @rmOfficeNorth.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmOfficeNorth.update_exits({"commons" => @rmOfficeCommons, "south" =>  @rmOfficeCommons, "office" =>  @rmOfficeCommons})
+        @objLaptop = Item.new("laptop", "BSOD laptop")
+        @objLaptop.update_verbs({"look" => "You look closely at the monitor.\nAs it flickers you swear you can see a face.\nA chill runs down your spine..."})
+        @rmOfficeNorth.update_objects({"laptop" => @objLaptop})
         
         @rmWashroom.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmWashroom.update_exits({"east" => @rmNorthHall, "hall" =>  @rmNorthHall})
