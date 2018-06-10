@@ -53,6 +53,12 @@ class Game
             You can go east back to the hall.
             DESC
         )
+        @rmCarpet = Room.new("Carpet Room", <<-DESC
+            A room with a nice plush carpet.
+            There is a piece of paper on the floor.
+            You can go east back out to the hallway.
+            DESC
+        )
 
         @objElevAPanel = Item.new("panel", "elevator panel")
         @objElevAPanel.update_verbs({"look" => "You can push one of the following:\nB1 1F 2F 3F 4F"})
@@ -72,7 +78,7 @@ class Game
         @rmElevatorB.update_objects({"panel" => @objElevAPanel})
 
         @rmSouthHall.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmSouthHall.update_exits({"south" => nil, "stairwell" => nil, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => nil, "north" => @rmNorthHall, "hall" => @rmNorthHall})
+        @rmSouthHall.update_exits({"south" => nil, "stairwell" => nil, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => @rmCarpet, "room" => @rmCarpet, "north" => @rmNorthHall, "hall" => @rmNorthHall})
 
         @rmNorthHall.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmNorthHall.update_exits({"east" => @rmOfficeCommons, "office" => @rmOfficeCommons, "west" => @rmWashroom, "washroom" => @rmWashroom, "south" => @rmSouthHall, "hall" => @rmSouthHall})
@@ -85,6 +91,9 @@ class Game
         
         @rmWashroom.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmWashroom.update_exits({"east" => @rmNorthHall, "hall" =>  @rmNorthHall})
+        
+        @rmCarpet.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmCarpet.update_exits({"east" => @rmSouthHall, "hall" =>  @rmSouthHall})
 
         @isRunning = true
     end
