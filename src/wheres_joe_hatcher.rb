@@ -23,8 +23,15 @@ class Game
             You can also go east to the office hallway.
             DESC
         )
+        @rmSouthHall = Room.new("South Hall", <<-DESC
+            You are in the office hallway, but there is no sign of Joe.
+            You can go through the door to the Carpet Room, west to the elevator,
+            south to the stairwell, or north through the hall.
+            DESC
+        )
+
         @objElevAPanel = Item.new("panel", "elevator panel")
-        @objElevAPanel.update_verbs({"look" => "Buttons are labeled: B1, 1F, 2F, 3F, 4F"})
+        @objElevAPanel.update_verbs({"look" => "You can push one of the following:\nB1 1F 2F 3F 4F"})
 
         @rmEntrance.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmEntrance.update_exits({"up" => @rmStairwellB, "north" => @rmElevatorA, "elevator" => @rmElevatorA})
@@ -37,7 +44,11 @@ class Game
         @rmElevatorA.update_objects({"panel" => @objElevAPanel})
 
         @rmElevatorB.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
-        @rmElevatorB.update_exits({"east" => @rmEntrance, "hall" => @rmEntrance, "1F" => @rmElevatorA})
+        @rmElevatorB.update_exits({"east" => @rmSouthHall, "hall" => @rmSouthHall, "1F" => @rmElevatorA})
+        @rmElevatorB.update_objects({"panel" => @objElevAPanel})
+
+        @rmSouthHall.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
+        @rmSouthHall.update_exits({"south" => @rmStairwellB, "stairwell" => @rmStairwellB, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => nil, "north" => nil})
 
         @isRunning = true
     end
