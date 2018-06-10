@@ -112,6 +112,9 @@ class Game
         
         @rmCarpet.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmCarpet.update_exits({"east" => @rmSouthHall, "hall" =>  @rmSouthHall})
+        @objPaper = Item.new("paper", "scrap paper")
+        @objPaper.update_verbs({"read" => "There are some numbers scribbled on it.\nThey read: \"2387465\""})
+        @rmCarpet.update_objects({"paper" => @objPaper})
 
         @isRunning = true
     end
