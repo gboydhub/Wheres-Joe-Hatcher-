@@ -85,11 +85,11 @@ class Game
         @rmStairwellD.update_exits({"down" => @rmStairwellC})
 
         @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
-        @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance, "3F" => @rmElevatorB})
+        @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance, "3f" => @rmElevatorB})
         @rmElevatorA.update_objects({"panel" => @objElevAPanel})
 
         @rmElevatorB.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
-        @rmElevatorB.update_exits({"east" => @rmSouthHall, "hall" => @rmSouthHall, "1F" => @rmElevatorA})
+        @rmElevatorB.update_exits({"east" => @rmSouthHall, "hall" => @rmSouthHall, "1f" => @rmElevatorA})
         @rmElevatorB.update_objects({"panel" => @objElevAPanel})
 
         @rmSouthHall.update_verbs({"walk" => "exit", "go" => "exit"})
@@ -152,7 +152,7 @@ class Game
     end
 
     def parse_command(input)
-        wordList = input.split
+        wordList = input.downcase.split
         if wordList.length <= 0 then
             return false
         end
@@ -162,9 +162,8 @@ class Game
             if wordList[0] == "quit" then
                 @isRunning = false
                 return true
-            # elsif wordList[0] == "look" then
-            #     refresh_room()
-            #     return true
+            elsif wordList[0] == "jump" then
+            #     ???
             end
             return false
         end
@@ -178,7 +177,7 @@ class Game
             end
         end
 
-        case result
+        case result.downcase
         when "exit"
             nextRoom = @currentRoom.get_exit(wordList[1])
             if nextRoom then
