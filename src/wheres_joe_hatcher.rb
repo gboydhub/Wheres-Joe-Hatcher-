@@ -159,6 +159,13 @@ class Game
         @currentRoom = room
     end
 
+    def slow_print(text, delay)
+        text.split("").each do |ch|
+            print ch
+            sleep delay
+        end
+    end
+
     def parse_command(input)
         wordList = input.downcase.split
         if wordList.length <= 0 then
@@ -171,7 +178,31 @@ class Game
                 @isRunning = false
                 return true
             elsif wordList[0] == "jump" then
-            #     ???
+                if @currentRoom == @rmWashroom then
+                    system "clear" or system "cls"
+                    sleep 1
+                    slow_print("You close your eyes.\n\n", 0.2)
+                    sleep 1
+                    slow_print("You begin to ", 0.2)
+                    slow_print("fall..\n\n", 0.5)
+                    sleep 2
+                    puts "As you fall the world transforms around you."
+                    sleep 1
+                    puts "Buildings shift and warp. You can no longer tell your relative size to the world around you."
+                    sleep 2
+                    print "You "
+                    slow_print("SMASH", 0.1)
+                    print " though a glass roof and land in a pool.\n"
+                    sleep 1
+                    puts "Despite it all you dont seem to be hurt."
+                    print "You swim to the surface "
+                    slow_print("and...", 0.3)
+                    puts "\n\nThank you for playing \"Wheres Joe Hatcher?\".\nI hope you enjoyed exploring this little game!"
+                    sleep 1
+                    @isRunning = false
+                    return true
+                end
+
             end
             return false
         end
