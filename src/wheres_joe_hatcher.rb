@@ -31,13 +31,26 @@ class Game
         )
         @rmNorthHall = Room.new("North Hall", <<-DESC
             You are at the north end of the office hallway.
-            You can go west to the bathroom or east into the office.
+            You can go west to the washroom or east into the office.
             DESC
         )
         @rmOfficeCommons = Room.new("Office Commons", <<-DESC
             You are in the office commons.
             The south door to the senior office is locked.
             You can go to the north office or west to the hallway.
+            DESC
+        )
+        @rmOfficeNorth = Room.new("North Office", <<-DESC
+            There are laptops open all around with the BSOD.
+            The screens constantly flicker.
+            You can go south back to the commons.
+            DESC
+        )
+        @rmWashroom = Room.new("Washroom", <<-DESC
+            The office washroom door was open.
+            The mirror is broken and the window is open.
+            You see Joe's cell phone on the floor.
+            You can go east back to the hall.
             DESC
         )
 
@@ -62,10 +75,16 @@ class Game
         @rmSouthHall.update_exits({"south" => nil, "stairwell" => nil, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => nil, "north" => @rmNorthHall, "hall" => @rmNorthHall})
 
         @rmNorthHall.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmNorthHall.update_exits({"east" => @rmOfficeCommons, "office" => @rmOfficeCommons, "west" => nil, "bathroom" => nil, "south" => @rmSouthHall, "hall" => @rmSouthHall})
+        @rmNorthHall.update_exits({"east" => @rmOfficeCommons, "office" => @rmOfficeCommons, "west" => @rmWashroom, "washroom" => @rmWashroom, "south" => @rmSouthHall, "hall" => @rmSouthHall})
         
         @rmOfficeCommons.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmOfficeCommons.update_exits({"west" => @rmNorthHall, "hall" => @rmNorthHall, "north" => nil, "office" => nil})
+        @rmOfficeCommons.update_exits({"west" => @rmNorthHall, "hall" => @rmNorthHall, "north" => @rmOfficeNorth, "office" => @rmOfficeNorth})
+        
+        @rmOfficeNorth.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmOfficeNorth.update_exits({"commons" => @rmOfficeCommons, "south" =>  @rmOfficeCommons, "office" =>  @rmOfficeCommons})
+        
+        @rmWashroom.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmWashroom.update_exits({"east" => @rmNorthHall, "hall" =>  @rmNorthHall})
 
         @isRunning = true
     end
