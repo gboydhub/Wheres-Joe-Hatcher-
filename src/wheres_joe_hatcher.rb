@@ -109,6 +109,11 @@ class Game
         
         @rmWashroom.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmWashroom.update_exits({"east" => @rmNorthHall, "hall" =>  @rmNorthHall})
+        @objMirror = Item.new("mirror", "broken mirror")
+        @objMirror.update_verbs({"look" => "The mirror is shattered to pieces. No blood, at least."})
+        @objWindow = Item.new("window", "open window")
+        @objWindow.update_verbs({"shut" => "You walk up to the window and gaze out...\nIt pulls you in and you feel like youre in a trance.\n\nIt almost makes you want to..."})
+        @rmWashroom.update_objects({"mirror" => @objMirror, "window" => @objWindow})
         
         @rmCarpet.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmCarpet.update_exits({"east" => @rmSouthHall, "hall" =>  @rmSouthHall})
