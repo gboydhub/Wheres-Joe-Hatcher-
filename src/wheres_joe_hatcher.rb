@@ -13,6 +13,15 @@ class Game
             There is a door here, or you can go up or down the stairs.
             DESC
         )
+        @rmStairwellC = Room.new("Stairwell [3F]", <<-DESC
+            You can go up or down the stairs.
+            Theres also a door to the north that leads to the office hall.
+            DESC
+        )
+        @rmStairwellD = Room.new("Stairwell [4F]", <<-DESC
+            There is a door here, or you can go down the stairs.
+            DESC
+        )
         @rmElevatorA = Room.new("Elevator [1F]", <<-DESC
             You are on the first floor. There is a panel of buttons here.
             You can also go south to the entrance of the building.
@@ -67,7 +76,13 @@ class Game
         @rmEntrance.update_exits({"up" => @rmStairwellB, "north" => @rmElevatorA, "elevator" => @rmElevatorA})
 
         @rmStairwellB.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmStairwellB.update_exits({"down" => @rmEntrance})
+        @rmStairwellB.update_exits({"down" => @rmEntrance, "up" => @rmStairwellC})
+
+        @rmStairwellC.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmStairwellC.update_exits({"down" => @rmStairwellB, "up" => @rmStairwellD, "north" => @rmSouthHall, "hall" => @rmSouthHall, "office" => @rmSouthHall})
+
+        @rmStairwellD.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmStairwellD.update_exits({"down" => @rmStairwellC})
 
         @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
         @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance, "3F" => @rmElevatorB})
@@ -78,7 +93,7 @@ class Game
         @rmElevatorB.update_objects({"panel" => @objElevAPanel})
 
         @rmSouthHall.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmSouthHall.update_exits({"south" => nil, "stairwell" => nil, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => @rmCarpet, "room" => @rmCarpet, "north" => @rmNorthHall, "hall" => @rmNorthHall})
+        @rmSouthHall.update_exits({"south" => @rmStairwellC, "stairwell" => @rmStairwellC, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => @rmCarpet, "room" => @rmCarpet, "north" => @rmNorthHall, "hall" => @rmNorthHall})
 
         @rmNorthHall.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmNorthHall.update_exits({"east" => @rmOfficeCommons, "office" => @rmOfficeCommons, "west" => @rmWashroom, "washroom" => @rmWashroom, "south" => @rmSouthHall, "hall" => @rmSouthHall})
