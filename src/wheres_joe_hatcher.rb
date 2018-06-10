@@ -18,6 +18,11 @@ class Game
             You can also go south to the entrance of the building.
             DESC
         )
+        @rmElevatorB = Room.new("Elevator [3F]", <<-DESC
+            You are on the third floor. There is a panel of buttons here.
+            You can also go east to the office hallway.
+            DESC
+        )
         @objElevAPanel = Item.new("panel", "elevator panel")
         @objElevAPanel.update_verbs({"look" => "Buttons are labeled: B1, 1F, 2F, 3F, 4F"})
 
@@ -27,8 +32,11 @@ class Game
         @rmStairwellB.update_verbs({"walk" => "exit", "go" => "exit"})
         @rmStairwellB.update_exits({"down" => @rmEntrance})
 
-        @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance})
+        @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
+        @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance, "3F" => @rmElevatorB})
+
+        @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
+        @rmElevatorA.update_exits({"east" => @rmEntrance, "hall" => @rmEntrance, "1F" => @rmElevatorA})
 
         @isRunning = true
     end
@@ -104,6 +112,10 @@ class Game
                 return true
             else
                 return false
+            end
+        when "item_verb"
+            if @currentRoom.item_exists?(wordList[1]) then
+
             end
         else
             return false

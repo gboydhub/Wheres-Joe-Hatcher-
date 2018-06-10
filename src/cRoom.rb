@@ -42,6 +42,10 @@ class Room
         @objects.has_key? name
     end
 
+    def try_item_verb(verb, itemname)
+        
+    end
+
 
     attr_reader     :name
     attr_reader     :desc
