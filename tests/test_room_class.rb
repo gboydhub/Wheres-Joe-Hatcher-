@@ -38,7 +38,7 @@ class Test_room_class < Test::Unit::TestCase
       newItem = Item.new("paper", "scrap")
       newItem.update_verbs({"read" => "Its a piece of paper"})
       place.update_objects({"paper" => newItem})
-      assert_equal(place.try_verb("read"), "item_verb")
+      assert_equal(place.try_verb("read"), "Its a piece of paper")
       assert_false(place.item_exists?("test"))
       assert_true(place.item_exists?("paper"))
     end

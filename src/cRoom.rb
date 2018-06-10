@@ -31,7 +31,7 @@ class Room
         end
         @objects.each do |oKey, obj|
             if obj.try_verb(verb) then
-                return "item_verb"
+                return obj.try_verb(verb)
             end
         end
 
@@ -43,7 +43,7 @@ class Room
     end
 
     def try_item_verb(verb, itemname)
-        
+
     end
 
 

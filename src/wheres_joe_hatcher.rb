@@ -34,9 +34,10 @@ class Game
 
         @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
         @rmElevatorA.update_exits({"south" => @rmEntrance, "entrance" => @rmEntrance, "3F" => @rmElevatorB})
+        @rmElevatorA.update_objects({"panel" => @objElevAPanel})
 
-        @rmElevatorA.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
-        @rmElevatorA.update_exits({"east" => @rmEntrance, "hall" => @rmEntrance, "1F" => @rmElevatorA})
+        @rmElevatorB.update_verbs({"walk" => "exit", "go" => "exit", "push" => "exit"})
+        @rmElevatorB.update_exits({"east" => @rmEntrance, "hall" => @rmEntrance, "1F" => @rmElevatorA})
 
         @isRunning = true
     end
@@ -87,9 +88,9 @@ class Game
             if wordList[0] == "quit" then
                 @isRunning = false
                 return true
-            elsif wordList[0] == "look" then
-                refresh_room()
-                return true
+            # elsif wordList[0] == "look" then
+            #     refresh_room()
+            #     return true
             end
             return false
         end
@@ -113,12 +114,9 @@ class Game
             else
                 return false
             end
-        when "item_verb"
-            if @currentRoom.item_exists?(wordList[1]) then
-
-            end
         else
-            return false
+            puts "\n#{result}"
+            return true
         end
         return false
     end
