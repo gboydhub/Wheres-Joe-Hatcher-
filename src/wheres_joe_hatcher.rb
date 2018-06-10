@@ -31,7 +31,13 @@ class Game
         )
         @rmNorthHall = Room.new("North Hall", <<-DESC
             You are at the north end of the office hallway.
-            You can go west to the bathroom or east into the office's.
+            You can go west to the bathroom or east into the office.
+            DESC
+        )
+        @rmOfficeCommons = Room.new("Office Commons", <<-DESC
+            You are in the office commons.
+            The south door to the senior office is locked.
+            You can go to the north office or west to the hallway.
             DESC
         )
 
@@ -56,7 +62,10 @@ class Game
         @rmSouthHall.update_exits({"south" => nil, "stairwell" => nil, "west" => @rmElevatorB, "elevator" => @rmElevatorB, "door" => nil, "north" => @rmNorthHall, "hall" => @rmNorthHall})
 
         @rmNorthHall.update_verbs({"walk" => "exit", "go" => "exit"})
-        @rmNorthHall.update_exits({"east" => nil, "office" => nil, "west" => nil, "bathroom" => nil, "south" => @rmSouthHall, "hall" => @rmSouthHall})
+        @rmNorthHall.update_exits({"east" => @rmOfficeCommons, "office" => @rmOfficeCommons, "west" => nil, "bathroom" => nil, "south" => @rmSouthHall, "hall" => @rmSouthHall})
+        
+        @rmOfficeCommons.update_verbs({"walk" => "exit", "go" => "exit"})
+        @rmOfficeCommons.update_exits({"west" => @rmNorthHall, "hall" => @rmNorthHall, "north" => nil, "office" => nil})
 
         @isRunning = true
     end
