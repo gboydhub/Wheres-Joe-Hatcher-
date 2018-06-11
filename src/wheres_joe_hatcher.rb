@@ -1,5 +1,6 @@
 require_relative 'cRoom'
 require_relative 'cItem'
+require_relative 'cTextParser'
 
 
 class Game
@@ -168,6 +169,7 @@ class Game
     end
 
     def parse_command(input)
+        txtParse = TextParser.new
         wordList = input.downcase.split
         if wordList.length <= 0 then
             return false

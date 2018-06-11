@@ -8,6 +8,9 @@ class TextParser
     def parse_string(input)
         wordAry = input.downcase.split
         @wasValid = false
+        @parsedVerb = ""
+        @parsedSubject = ""
+
         if wordAry.length == 0 then
             @wasValid = false
             return
@@ -18,7 +21,7 @@ class TextParser
                 wordAry[1] = wordAry[2]
                 wordAry.delete_at(2)
             else
-                wasValid = false
+                @wasValid = false
                 return
             end
         end
