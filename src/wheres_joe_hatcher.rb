@@ -170,17 +170,23 @@ class Game
 
     def parse_command(input)
         txtParse = TextParser.new
-        wordList = input.downcase.split
-        if wordList.length <= 0 then
+        txtParse.parse_string(input)
+
+        if(!txtParse.wasValid) then
             return false
         end
+        
+        # wordList = input.downcase.split
+        # if wordList.length <= 0 then
+        #     return false
+        # end
 
-        result = @currentRoom.try_verb(wordList[0])
-        if(!result || wordList.length == 1) then
-            if wordList[0] == "quit" then
+        result = @currentRoom.try_verb(txtParse.parsedVerb)
+        if(!result || txtParse.parsedSubject == "") then
+            if txtParse.parsedVerb == "quit" then
                 @isRunning = false
                 return true
-            elsif wordList[0] == "jump" then
+            elsif txtParse.parsedVerb == "jump" then
                 if @currentRoom == @rmWashroom then
                     system "clear" or system "cls"
                     sleep 1
@@ -210,18 +216,18 @@ class Game
             return false
         end
 
-        while(wordList.length > 2)
-            if ["is", "to", "a", "the", "at"].include?(wordList[1])
-                wordList[1] = wordList[2]
-                wordList.delete_at(2)
-            else
-                return false
-            end
-        end
+        # while(wordList.length > 2)
+        #     if ["is", "to", "a", "the", "at"].include?(wordList[1])
+        #         wordList[1] = wordList[2]
+        #         wordList.delete_at(2)
+        #     else
+        #         return false
+        #     end
+        # end
 
         case result.downcase
         when "exit"
-            nextRoom = @currentRoom.get_exit(wordList[1])
+            nextRoom = @currentRoom.get_exit(txtParse.parsedSubject)
             if nextRoom then
                 goto_room(nextRoom)
                 if !defined?(ISTESTING); refresh_room() end
