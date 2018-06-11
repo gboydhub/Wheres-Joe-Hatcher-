@@ -122,6 +122,7 @@ class Game
         @rmCarpet.update_objects({"paper" => @objPaper})
 
         @isRunning = true
+        @currentRoom = nil
     end
 
     def start()
